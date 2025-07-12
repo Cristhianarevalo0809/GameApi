@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { GamesModule } from './games/games.module';
 import { envs } from './config/envs';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
         },
       },
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [],

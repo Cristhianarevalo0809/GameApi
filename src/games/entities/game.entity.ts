@@ -1,12 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   AutoIncrement,
+  BelongsToMany,
   Column,
   DataType,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { User } from 'src/user/entities/user.entity';
+import { GamePlayer } from './game.player.entity';
 
 @Table
 export class Game extends Model {
@@ -45,12 +48,6 @@ export class Game extends Model {
     example: 'shinta, ocean',
     description: 'joined succes!',
   })
-  @Column({
-    type: DataType.ARRAY(DataType.STRING),
-    defaultValue: [],
-  })
-  players: string[];
-
   @ApiProperty({
     example: 'state',
     description: 'estate accept',
@@ -70,4 +67,7 @@ export class Game extends Model {
     allowNull: true,
   })
   score: Record<string, number>;
+
+  @BelongsToMany(() => User, () => GamePlayer)
+  players: User[];
 }
