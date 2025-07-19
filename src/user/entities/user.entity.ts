@@ -7,8 +7,12 @@ import {
 } from 'sequelize-typescript';
 import { Game } from 'src/games/entities/game.entity';
 import { GamePlayer } from 'src/games/entities/game.player.entity';
+import { UserRole } from '../interfaces/user-role.interface';
 
-@Table
+@Table({
+  tableName: 'users',
+  timestamps: true,
+})
 export class User extends Model {
   @Column({
     type: DataType.STRING,
@@ -21,6 +25,18 @@ export class User extends Model {
     allowNull: false,
   })
   email: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  password: string;
+
+  @Column({
+    type: DataType.ARRAY(DataType.ENUM(UserRole.ADMIN, UserRole.USER)),
+    allowNull: false,
+  })
+  rol: UserRole[];
 
   @Column({
     type: DataType.BOOLEAN,

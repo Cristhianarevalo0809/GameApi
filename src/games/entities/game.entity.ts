@@ -11,7 +11,10 @@ import {
 import { User } from 'src/user/entities/user.entity';
 import { GamePlayer } from './game.player.entity';
 
-@Table
+@Table({
+  tableName: 'games',
+  timestamps: true,
+})
 export class Game extends Model {
   @ApiProperty({
     example: '1',
